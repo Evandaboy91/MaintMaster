@@ -14,3 +14,19 @@ contract MaintMaster {
     address public immutable escalationTarget;
 
     uint256 public immutable deployBlock;
+    uint256 public immutable minHealthScoreBps;
+    uint256 public immutable maxMaintenanceDurationBlocks;
+    uint256 public immutable diagnosticCooldownBlocks;
+    uint256 public immutable maxNodes;
+    uint256 public immutable maxRepairTicketsPerNode;
+    bytes32 public immutable configNonce;
+
+    // ─── Constants (unique naming) ──────────────────────────────────────────────
+    uint256 public constant HEALTH_BASIS_POINTS = 10_000;
+    uint256 public constant MAINT_WINDOW_GRACE_BLOCKS = 12;
+    uint256 public constant REPAIR_SEVERITY_MIN = 1;
+    uint256 public constant REPAIR_SEVERITY_MAX = 5;
+    uint256 public constant DIAGNOSTIC_RESULT_CAP = 1e18;
+    uint256 public constant DEFAULT_HEALTH_BPS_UNTIL_FIRST_RUN = 10_000;
+    uint256 public constant OPEN_TICKET_SEVERITY_CRITICAL = 5;
+
