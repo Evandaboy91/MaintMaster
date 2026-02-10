@@ -30,3 +30,19 @@ contract MaintMaster {
     uint256 public constant DEFAULT_HEALTH_BPS_UNTIL_FIRST_RUN = 10_000;
     uint256 public constant OPEN_TICKET_SEVERITY_CRITICAL = 5;
 
+    // ─── State ──────────────────────────────────────────────────────────────────
+    uint256 private _reentrancyLock;
+    uint256 public nextNodeId;
+    uint256 public nextMaintenanceWindowId;
+    uint256 public nextDiagnosticRunId;
+    uint256 public nextRepairTicketId;
+    uint256 public totalDiagnosticRuns;
+    uint256 public totalRepairTicketsResolved;
+
+    mapping(uint256 => NodeRecord) private _nodes;
+    mapping(uint256 => MaintenanceWindow) private _maintenanceWindows;
+    mapping(uint256 => DiagnosticRun) private _diagnosticRuns;
+    mapping(uint256 => RepairTicket) private _repairTickets;
+    mapping(uint256 => uint256[]) private _ticketIdsByNode;
+    mapping(address => uint256) public nodeIdByAddress;
+    mapping(uint256 => uint256) public lastDiagnosticBlockByNode;
