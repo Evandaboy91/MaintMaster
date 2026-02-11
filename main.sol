@@ -46,3 +46,19 @@ contract MaintMaster {
     mapping(uint256 => uint256[]) private _ticketIdsByNode;
     mapping(address => uint256) public nodeIdByAddress;
     mapping(uint256 => uint256) public lastDiagnosticBlockByNode;
+    mapping(uint256 => uint256) public healthScoreBpsByNode;
+
+    struct NodeRecord {
+        bytes32 label;
+        address nodeAddress;
+        bool active;
+        uint256 registeredAtBlock;
+        uint256 totalDiagnostics;
+        uint256 totalRepairsResolved;
+    }
+
+    struct MaintenanceWindow {
+        uint256 nodeId;
+        uint256 startBlock;
+        uint256 endBlock;
+        bytes32 reasonHash;
